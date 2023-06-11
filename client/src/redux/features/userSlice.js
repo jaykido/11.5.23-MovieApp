@@ -4,7 +4,7 @@ export const userSlice = createSlice({
   name: "User",
   initialState: {
     user: null,
-    listFavourites: [],
+    listFavourites: [202250],
   },
   reducers: {
     setUser: (state, action) => {
