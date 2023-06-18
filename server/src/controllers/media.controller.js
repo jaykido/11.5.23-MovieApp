@@ -10,8 +10,8 @@ const getList = async (req, res) => {
   try {
     const { page } = req.query;
     const { mediaType, mediaCategory } = req.params;
-    console.log("Backend:", req.query);
-    console.log("Backend also:", req.params);
+    // console.log("Backend:", req.query);
+    // console.log("Backend also:", req.params);
     const response = await tmdbApi.MediaList({
       mediaType,
       mediaCategory,
@@ -68,11 +68,11 @@ const getDetails = async (req, res) => {
 
     media.video = video;
 
-    const recommend = await tmdbApi.MediaRecommend(param);
+    const recommend = await tmdbApi.MediaRecommend(params);
 
     media.recommend = recommend.results;
 
-    media.image = await tmdbApi.MediaImages(param);
+    media.image = await tmdbApi.MediaImages(params);
 
     const tokenDecoded = tokenMiddleware.tokenDecode(req);
 

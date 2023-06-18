@@ -34,6 +34,7 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
+    dispatch(setGlobalLoading(true));
     const getMedias = async () => {
       const { response, err } = await mediaApi.getList({
         mediaType,
@@ -58,7 +59,7 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
       }
       if (err) {
         toast.error(err.message);
-        setGlobalLoading(false);
+        dispatch(setGlobalLoading(false));
       }
     };
 

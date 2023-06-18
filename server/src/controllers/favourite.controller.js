@@ -3,6 +3,7 @@ import favouriteModel from "../models/favourite.model.js";
 
 const addFavourite = async (req, res) => {
   try {
+    console.log("The user id:", req.user.id);
     const isFavourite = await favouriteModel.findOne({
       user: req.user.id,
       mediaId: req.body.mediaId,
@@ -31,18 +32,18 @@ const addFavourite = async (req, res) => {
 const removeFavourite = async (req, res) => {
   try {
     const { favouriteId } = req.params;
+    console.log("BackendFav:", favouriteId);
 
-    const favourite = await favouriteModel.findOne({
+    const favourite = await favouriteModel.findOneAndDelete({
       user: req.user.id,
       _id: favouriteId,
     });
+    console.log("FavMaster:", favourite);
 
     if (!favourite) return responseHandler.notfound(res);
 
-    await favourite.remove();
-
-    responseHandler.ok(res);
-  } catch {
+    responseHandler.ok(res, favourite);
+  } catch (error) {
     responseHandler.error(res);
   }
 };

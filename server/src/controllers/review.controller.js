@@ -23,17 +23,17 @@ const create = async (req, res) => {
 const remove = async (req, res) => {
   try {
     const { reviewId } = req.params;
+    console.log("The user:", req.user.id);
 
-    const review = await reviewModel.findOne({
+    const review = await reviewModel.findOneAndDelete({
       _id: reviewId,
       user: req.user.id,
     });
+    console.log("The review:", review);
 
     if (!review) return responseHandler.notfound(res);
 
-    await review.remove();
-
-    responseHandler.ok(res);
+    responseHandler.ok(res, review);
   } catch {
     responseHandler.error(res);
   }

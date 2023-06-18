@@ -22,9 +22,10 @@ const mediaApi = {
   },
 
   getDetail: async ({ mediaType, mediaId }) => {
+    console.log("Get details:", mediaType, mediaId);
     try {
       const response = await privateClient.get(
-        mediaEndpoints.list({ mediaType, mediaId })
+        mediaEndpoints.detail({ mediaType, mediaId })
       );
       return { response };
     } catch (err) {

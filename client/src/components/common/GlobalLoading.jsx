@@ -23,12 +23,12 @@ const GlobalLoading = () => {
       <Paper
         sx={{
           opacity: isLoading ? 1 : 0,
-          PointerEvents: "none",
+          pointerEvents: "none",
           transition: "all .3s ease",
           position: "fixed",
           width: "100vw",
           height: "100vh",
-          // zIndex: 999,
+          zIndex: 9999,
         }}
       >
         <Toolbar />

@@ -30,6 +30,7 @@ const MediaItem = ({ media, mediaType }) => {
           media.profile_path
       )
     );
+
     if (mediaType === tmdbConfigs.mediaType.movie) {
       setReleaseDate(media.release_date && media.release_date.split("-")[0]);
     } else {
@@ -38,11 +39,12 @@ const MediaItem = ({ media, mediaType }) => {
       );
     }
 
-    setRate(media.vote_avarage || media.mediaRate);
+    setRate(media.vote_average || media.mediaRate);
   }, [media, mediaType]);
 
   // console.log("The media is:", media);
   // console.log("The mediatype is:", mediaType);
+  // console.log("The rate is is:", rate);
 
   return (
     <Link
@@ -85,11 +87,8 @@ const MediaItem = ({ media, mediaType }) => {
                 position: "absolute",
                 top: 0,
                 left: 0,
-                backgroundImage: "none",
-                "&:hover": {
-                  backgroundImage:
-                    "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))",
-                },
+                backgroundImage:
+                  "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))",
               }}
             />
             <Button
@@ -107,9 +106,59 @@ const MediaItem = ({ media, mediaType }) => {
                 "& .MuiButton-startIcon": { marginRight: "-4px" },
               }}
             />
+
+            <Box
+              className="media-info"
+              sx={{
+                transition: "all 0.3s ease",
+                opacity: { xs: 1, md: 0 },
+                position: "absolute",
+                bottom: { xs: 0, md: "-20px" },
+                width: "100%",
+                height: "max-content",
+                boxSizing: "border-box",
+                padding: { xs: "10px", md: "2rem 1rem" },
+              }}
+            >
+              <Stack spacing={{ xs: 1, md: 2 }}>
+                {rate && <CircularRate value={rate} />}
+
+                <Typography>{releaseDate}</Typography>
+
+                <Typography
+                  variant="body1"
+                  fontWeight="700"
+                  sx={{
+                    fontSize: "1rem",
+                    ...uiConfigs.style.typoLines(1, "left"),
+                  }}
+                >
+                  {title}
+                </Typography>
+              </Stack>
+            </Box>
           </>
         )}
         {/* movie or tv items */}
+        {/* people */}
+        {mediaType === "people" && (
+          <Box
+            sx={{
+              position: "absolute",
+              width: "100%",
+              height: "max-content",
+              bottom: 0,
+              padding: "10px",
+              backgroundColor: "rgba(0,0,0,0.6)",
+            }}
+          >
+            <Typography sx={{ ...uiConfigs.style.typoLines(1, "left") }}>
+              {media.name}
+            </Typography>
+          </Box>
+        )}
+
+        {/* people */}
       </Box>
     </Link>
   );

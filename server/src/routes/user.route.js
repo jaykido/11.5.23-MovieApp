@@ -8,6 +8,11 @@ import tokenMiddleware from "../middlewares/token.middleware.js";
 
 const router = express.Router();
 
+const logRequestData = (req, res, next) => {
+  console.log("The body is body:", body);
+  next();
+};
+
 router.post(
   "/signup",
   body("username")
@@ -40,6 +45,7 @@ router.post(
     .withMessage("display name is required")
     .isLength({ min: 8 })
     .withMessage("Minimum displayName length is 8 characters"),
+  // logRequestData,
   userController.signup
 );
 
@@ -85,16 +91,11 @@ router.put(
   userController.updatePassword
 );
 
-const logRequestData = (req, res, next) => {
-  console.log("Mjays is herer");
-  next();
-};
-
 router.get("/info", tokenMiddleware.auth, userController.getInfo);
 
 router.get(
   "/favourites",
-  // logRequestData,
+
   tokenMiddleware.auth,
   favouriteController.getFavouriteOfUser
 );
@@ -120,7 +121,7 @@ router.post(
 );
 
 router.delete(
-  "/favourites/:favourite:id",
+  "/favourites/:favouriteId",
   tokenMiddleware.auth,
   favouriteController.removeFavourite
 );

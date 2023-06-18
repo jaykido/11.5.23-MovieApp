@@ -5,11 +5,13 @@ import responseHandler from "../handlers/response.handler.js";
 const signup = async (req, res) => {
   try {
     const { username, password, displayName } = req.body;
+    console.log("The body is:", req.body);
 
     // Step 1: Checking if the username already exists
     const checkUser = await userModel.findOne({ username });
 
     if (checkUser) {
+      console.log("The checked user:", checkUser);
       return responseHandler.badrequest(res, "Username already in use");
     }
 
