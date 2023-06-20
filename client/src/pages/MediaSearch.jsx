@@ -37,13 +37,12 @@ const MediaSearch = () => {
   }, [mediaType, query, page]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-
+    // window.scrollTo(0, 0);
     if (query.trim().length === 0) {
       setMedias([]);
       setPage(1);
     } else search();
-  }, [search, query, mediaType]);
+  }, [search, query, mediaType, page]);
 
   useEffect(() => {
     setMedias([]);
@@ -98,7 +97,12 @@ const MediaSearch = () => {
             autoFocus
             onChange={onQueryChange}
           />
-          <MediaGrid medias={medias} mediaTypes={mediaType} />
+          <MediaGrid medias={medias} mediaType={mediaType} />
+          {medias.length > 0 && (
+            <LoadingButton loading={onSearch} onClick={() => setPage(page + 1)}>
+              load more
+            </LoadingButton>
+          )}
         </Stack>
       </Box>
     </>

@@ -43,13 +43,12 @@ const search = async (req, res) => {
     const { query, page } = req.query;
 
     const response = await tmdbApi.MediaSearch({
+      mediaType: mediaType === "people" ? "person" : mediaType,
       query,
       page,
-      mediaType: mediaType === "people" ? "person" : mediaType,
     });
-
-    return responseHandler(res, response);
-  } catch {
+    return responseHandler.ok(res, response);
+  } catch (error) {
     responseHandler.error(res);
   }
 };

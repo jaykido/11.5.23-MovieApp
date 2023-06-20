@@ -39,7 +39,7 @@ const routes = [
     path: "password-update",
     element: (
       <ProtectedPage>
-        <PasswordUpdate />{" "}
+        <PasswordUpdate />
       </ProtectedPage>
     ),
     state: "password.update",

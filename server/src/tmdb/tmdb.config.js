@@ -3,10 +3,14 @@ const key = process.env.TMDB_KEY;
 
 const geturl = (endpoint, params) => {
   const qs = new URLSearchParams(params);
-  console.log("URL:", `${baseUrl}${endpoint}?api_key=${key}&${qs}`);
-  // console.log("I am here in tmdb");
+  console.log("URL:", `${baseUrl}${endpoint}&api_key=${key}&${qs}`);
+  // console.log("I am here in tmdb:", endpoint);
 
-  return `${baseUrl}${endpoint}?api_key=${key}&${qs}`;
+  if (endpoint.includes("search" || "person")) {
+    return `${baseUrl}${endpoint}&api_key=${key}&${qs}`;
+  } else {
+    return `${baseUrl}${endpoint}?api_key=${key}&${qs}`;
+  }
 };
 
 export default { geturl };

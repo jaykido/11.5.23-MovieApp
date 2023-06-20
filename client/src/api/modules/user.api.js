@@ -50,7 +50,6 @@ const userApi = {
         newPassword,
         confirmNewPassword,
       });
-
       return { response };
     } catch (err) {
       return { err };

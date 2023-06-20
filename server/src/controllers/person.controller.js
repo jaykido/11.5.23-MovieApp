@@ -15,6 +15,7 @@ const personDetails = async (req, res) => {
 const personMedias = async (req, res) => {
   try {
     const { personId } = req.params;
+    console.log("backended", personId);
 
     const medias = await tmdbApi.personMedias({ personId });
 

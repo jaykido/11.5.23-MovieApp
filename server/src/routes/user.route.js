@@ -9,7 +9,7 @@ import tokenMiddleware from "../middlewares/token.middleware.js";
 const router = express.Router();
 
 const logRequestData = (req, res, next) => {
-  console.log("The body is body:", body);
+  console.log("The body is body:", req.body);
   next();
 };
 
@@ -45,7 +45,6 @@ router.post(
     .withMessage("display name is required")
     .isLength({ min: 8 })
     .withMessage("Minimum displayName length is 8 characters"),
-  // logRequestData,
   userController.signup
 );
 
@@ -68,6 +67,7 @@ router.post(
 
 router.put(
   "/update-password",
+  // logRequestData,
   tokenMiddleware.auth,
   body("password")
     .exists()
@@ -79,11 +79,11 @@ router.put(
     .withMessage("a new passord is required")
     .isLength({ min: 8 })
     .withMessage("new Password minimum must be 8 charactors"),
-  body("confirmPassword")
+  body("confirmNewPassword")
     .isLength({ min: 8 })
     .withMessage("Minimus Password confirmation should be 8 charactors")
     .custom((value, { req }) => {
-      if (value !== req.body.password)
+      if (value !== req.body.newPassword)
         throw new Error("Password confrirmation is not a match");
       return true;
     }),

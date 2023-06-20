@@ -21,9 +21,9 @@ const tmdbApi = {
     await axiosClient.get(tmdbEndpoints.mediaImage({ mediaType, mediaId })),
   MediaRecommend: async ({ mediaType, mediaId }) =>
     await axiosClient.get(tmdbEndpoints.mediaRecommend({ mediaType, mediaId })),
-  MediaSearch: async ({ mediaType, quert, page }) =>
+  MediaSearch: async ({ mediaType, query, page }) =>
     await axiosClient.get(
-      tmdbEndpoints.mediaSearch({ mediaType, quert, page })
+      tmdbEndpoints.mediaSearch({ mediaType, query, page })
     ),
   personDetails: async ({ personId }) =>
     await axiosClient.get(tmdbEndpoints.personDetails({ personId })),

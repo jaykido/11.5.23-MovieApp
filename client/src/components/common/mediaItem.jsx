@@ -45,7 +45,6 @@ const MediaItem = ({ media, mediaType }) => {
   // console.log("The media is:", media);
   // console.log("The mediatype is:", mediaType);
   // console.log("The rate is is:", rate);
-
   return (
     <Link
       to={

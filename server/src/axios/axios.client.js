@@ -8,7 +8,8 @@ const get = async (url) => {
     },
   });
 
-  // console.log("Axios response:", response);
+  console.log("Axios response rule:", response);
+  console.log("and the url is:", url);
 
   return response.data;
 };

@@ -15,10 +15,10 @@ const tmdbEndpoints = {
   mediaImage: ({ mediaType, mediaId }) =>
     tmdbConfig.geturl(`${mediaType}/${mediaId}/images`),
   mediaSearch: ({ mediaType, query, page }) =>
-    tmdbConfig.geturl(`${mediaType}/${mediaId}`, { query, page }),
-  personDetails: ({ personId }) => tmdbConfig.geturl(`/person${personId}`),
+    tmdbConfig.geturl(`search/${mediaType}?query=${query}`, { page }),
+  personDetails: ({ personId }) => tmdbConfig.geturl(`person/${personId}`),
   personMedias: ({ personId }) =>
-    tmdbConfig.geturl(`/person${personId}/combibed_credits`),
+    tmdbConfig.geturl(`person/${personId}/combined_credits`),
 };
 
 export default tmdbEndpoints;

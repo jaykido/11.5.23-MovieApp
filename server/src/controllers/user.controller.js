@@ -70,6 +70,7 @@ const signin = async (req, res) => {
 const updatePassword = async (req, res) => {
   try {
     const { password, newPassword } = req.body;
+    // console.log("combustion", req.user.id);
 
     const user = await userModel
       .findById(req.user.id)
@@ -77,14 +78,14 @@ const updatePassword = async (req, res) => {
 
     if (!user) return responseHandler.unauthorize(res);
 
-    if (!user.validPassword(password))
+    if (!user.validatePassword(password))
       return responseHandler.badrequest(res, "Wrong Password");
 
     user.setPassword(newPassword);
 
     await user.save();
 
-    responseHandler.ok(res);
+    responseHandler.ok(res, user);
   } catch {
     responseHandler.error(res);
   }

@@ -34,6 +34,7 @@ const mediaApi = {
   },
   search: async ({ mediaType, query, page }) => {
     try {
+      console.log("The mediaType in media api :", mediaType);
       const response = await publicClient.get(
         mediaEndpoints.search({ mediaType, query, page })
       );

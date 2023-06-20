@@ -17,6 +17,7 @@ const personApi = {
     }
   },
   medias: async ({ personId }) => {
+    console.log("here in the medias:", personId);
     try {
       const response = await publicClient.get(
         personEndpoints.medias({ personId })
@@ -27,3 +28,5 @@ const personApi = {
     }
   },
 };
+
+export default personApi;
