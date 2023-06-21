@@ -7,10 +7,10 @@ import http from "http";
 import mongoose from "mongoose";
 import "dotenv/config";
 import routes from "./src/routes/index.js";
-import path from "path";
+// import path from "path";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 
 const app = express();
 
@@ -21,17 +21,17 @@ app.use(cookieParser());
 
 app.use("/api/v1", routes);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/public")));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "../client/public")));
 
-  app.get("*", (req, res) =>
-    res.sendFile(
-      path.resolve(__dirname, "../", "client", "public", "index.html")
-    )
-  );
-} else {
-  app.get("/", (req, res) => res.send("Please set to production"));
-}
+//   app.get("*", (req, res) =>
+//     res.sendFile(
+//       path.resolve(__dirname, "../", "client", "public", "index.html")
+//     )
+//   );
+// } else {
+//   app.get("/", (req, res) => res.send("Please set to production"));
+// }
 
 const port = process.env.PORT || 5000;
 
